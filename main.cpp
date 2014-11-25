@@ -142,10 +142,26 @@ int main( int argc, char** argv )
     cameraMatrix = cameraRotation * cameraPosition;
 
 	osgViewer::Viewer viewer;
+    osg::Camera* camera = viewer.getCamera();
+
+    camera->setClearColor(osg::Vec4(0.5f, 0.5f, 0.5f, 1.0f));
+
+    float cameraAngle = 0;
+
 	viewer.setSceneData( root );
     while(viewer.done() == false)
     {
-        viewer.getCamera()->setViewMatrix(cameraMatrix);
+        cameraAngle += 0.03;
+
+        cameraRotation.makeRotate(
+                cameraAngle, osg::Vec3(0, 1, 0),
+                0, osg::Vec3(1, 0, 0),
+                0, osg::Vec3(0, 0, 1)
+            );
+
+        cameraMatrix = cameraRotation * cameraPosition;
+
+        camera->setViewMatrix(cameraMatrix);
         viewer.frame();
     }
     //return viewer.run();

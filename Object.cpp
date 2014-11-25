@@ -8,10 +8,13 @@ Object::Object(Mesh* geometry)
     this->mAngle.set(0, 0, 0);
     this->mScale.set(1, 1, 1);
 
+    mGeode = new osg::Geode();
     mRoot = new osg::PositionAttitudeTransform();
 
     osg::Geometry* osgGeometry = geometry->getOsgGeometry();
-    mRoot->addDrawable(osgGeometry);
+    mGeode->addDrawable(osgGeometry);
+    mRoot->addChild(mGeode);
+    //mRoot->addDrawable(osgGeometry);
 }
 
 void Object::setPos(osg::Vec3 pos)

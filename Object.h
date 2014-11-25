@@ -4,6 +4,7 @@
 #include <osg/Geode>
 #include <osg/Vec3>
 #include <osg/Geometry>
+#include <osg/PositionAttitudeTransform>
 
 #include "Mesh.h"
 
@@ -19,6 +20,7 @@ public:
     osg::PositionAttitudeTransform* getRoot();
 private:
     osg::PositionAttitudeTransform* mRoot;
+    osg::Geode* mGeode;
     Mesh* mGeometry;
 
     osg::Vec3 mPos;

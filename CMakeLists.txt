@@ -18,6 +18,8 @@ set(SOURCES
     Object.h
     Mesh.cpp
     Mesh.h
+    Material.cpp
+    Material.h
     )
 
 add_executable( MyProject ${SOURCES} )
