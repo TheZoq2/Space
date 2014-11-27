@@ -6,6 +6,7 @@ find_package( osg )
 find_package( osgDB )
 find_package( osgUtil )
 find_package( osgViewer )
+find_package( osgGA ) 
 
 macro( config_project PROJNAME LIBNAME )
 include_directories( ${${LIBNAME}_INCLUDE_DIR} )
@@ -20,6 +21,10 @@ set(SOURCES
     Mesh.h
     Material.cpp
     Material.h
+    Camera.cpp
+    Camera.h
+    KeyboardHandler.h
+    KeyboardHandler.cpp
     )
 
 add_executable( MyProject ${SOURCES} )
@@ -28,3 +33,4 @@ config_project( MyProject OSG )
 config_project( MyProject OSGDB )
 config_project( MyProject OSGUTIL )
 config_project( MyProject OSGVIEWER )
+config_project( MyProject OSGGA ) 

@@ -10,7 +10,7 @@ void Material::setTexture(int id, osg::Texture2D* texture)
     //If there is a texture with that ID already
     if(mTextures.count(id) != 0)
     {
-        delete mTextures[id];
+        //delete mTextures[id];
     }
 
     this->mTextures[id] = texture;
