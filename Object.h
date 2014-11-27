@@ -13,9 +13,10 @@ class Object
 public:
     Object(Mesh* geometry);
 
-    void setPos(osg::Vec3 pos);
-    void setAngle(osg::Vec3 angle);
+    void setPosition(osg::Vec3 pos);
     void setScale(osg::Vec3 scale);
+    void setRotation(float rotationX, float rotationY, float rotationZ);
+    void setRotation(osg::Vec3 rotation);
 
     osg::PositionAttitudeTransform* getRoot();
 private:
@@ -24,8 +25,9 @@ private:
     Mesh* mGeometry;
 
     osg::Vec3 mPos;
-    osg::Vec3 mAngle;
     osg::Vec3 mScale;
+    osg::Vec3 mRotation;
+    osg::Quat mQuat;
 };
 
 #endif
