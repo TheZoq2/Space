@@ -10,6 +10,8 @@ public:
     Material();
 
     void setTexture(int id, osg::Texture2D* texture);
+
+    osg::StateSet* getStateSet();
     
 private:
     osg::StateSet* mStateSet;
