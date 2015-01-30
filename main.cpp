@@ -127,13 +127,21 @@ int main()
     Mesh cubeGeometry = createCubeGeometry();
     Object skybox(&cubeGeometry);
     
+    int sceneryAmount = 100;
+    int maxSize = 30;
+    std::vector<Object> scenery;
+
     osg::Group* root = new osg::Group();
 
     root->addChild(skybox.getRoot());
 
-    skybox.setPosition(osg::Vec3(0, 0, -3));
-    skybox.setScale(osg::Vec3(0.1f, 0.1f, 0.1f));
-    skybox.setRotation(0.5, 0.5, 0.5);
+    int worldSize = 100000;
+
+    //skybox.setPosition(osg::Vec3(0, 0, -3));
+    skybox.setPosition(osg::Vec3(0, 0, 0));
+    //skybox.setScale(osg::Vec3(0.1f, 0.1f, 0.1f));
+    skybox.setScale(osg::Vec3(worldSize, worldSize, worldSize));
+    //skybox.setRotation(0.5, 0.5, 0.5);
 
 	osgViewer::Viewer viewer;
 
@@ -151,7 +159,7 @@ int main()
         cameraAngle += 0.03;
         skybox.setRotation(0.5, 0, objectAnge);
 
-        camera.setRotation(osg::Vec3(0, cameraAngle, 0));
+        camera.setRotation(osg::Vec3(0, sin(cameraAngle), 0));
         viewer.frame();
     }
 }
