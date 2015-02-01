@@ -4,11 +4,13 @@
 #include <osgViewer/Viewer>
 #include <osg/Geometry>
 #include <osg/Matrix>
+#include <osg/Texture2D>
 
 #include "Object.h"
 #include "Mesh.h"
 #include "Camera.h"
 #include "KeyboardHandler.h"
+#include "Material.h"
 
 Mesh createCubeGeometry()
 {
@@ -109,6 +111,7 @@ Mesh createCubeGeometry()
     
     //Colors
     osg::Vec4Array* colors = new osg::Vec4Array;
+    /*
     colors->push_back(osg::Vec4(0.0f, 0.0f, 0.0f, 1.0f));
     colors->push_back(osg::Vec4(0.0f, 0.0f, 1.0f, 1.0f));
     colors->push_back(osg::Vec4(0.0f, 1.0f, 0.0f, 1.0f));
@@ -117,7 +120,35 @@ Mesh createCubeGeometry()
     colors->push_back(osg::Vec4(1.0f, 0.0f, 1.0f, 1.0f));
     colors->push_back(osg::Vec4(1.0f, 1.0f, 0.0f, 1.0f));
     colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f));
+    */
+
+    for(int i = 0; i < 8; i++)
+    {
+        colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f));
+    }
+
+    //Setting texture coords
+    osg::Vec2Array* texCoords = new osg::Vec2Array(8);
+    (*texCoords)[0].set(1.0f, 1.0f);
+    (*texCoords)[1].set(0.0f, 1.0f);
+    (*texCoords)[2].set(1.0f, 0.0f);
+    (*texCoords)[3].set(0.0f, 0.0f);
+    (*texCoords)[4].set(1.0f, 1.0f);
+    (*texCoords)[5].set(0.0f, 1.0f);
+    (*texCoords)[6].set(1.0f, 0.0f);
+    (*texCoords)[7].set(0.0f, 1.0f);
+    (*texCoords)[8].set(0.0f, 0.0f);
     
+    verts->push_back( osg::Vec3(1, 1, 1));
+    verts->push_back( osg::Vec3(-1, 1, 1));
+    verts->push_back( osg::Vec3(1, 1, -1));
+    verts->push_back( osg::Vec3(-1, 1, -1));
+    //Bottom faces
+    verts->push_back( osg::Vec3(1, -1, 1));
+    verts->push_back( osg::Vec3(-1, -1, 1));
+    verts->push_back( osg::Vec3(1, -1, -1));
+    verts->push_back( osg::Vec3(-1, -1, -1));
+
     Mesh result(verts, faces, colors);
     return result;
 }
@@ -143,21 +174,39 @@ int main()
     skybox.setScale(osg::Vec3(worldSize, worldSize, worldSize));
     //skybox.setRotation(0.5, 0.5, 0.5);
 
+    //Loading skybox texture
+    osg::Texture2D* skyboxTexture = new osg::Texture2D();
+    osg::Image* skyboxImage = osgDB::readImageFile("../media/stars.png");
+
+    if(!skyboxImage)
+    {
+        std::cout << "Failed to load image" << std::endl;
+    }
+    
+    skyboxTexture->setImage(skyboxImage);
+
+    Material skyboxMaterial;
+    skyboxMaterial.setTexture(0, skyboxTexture);
+
+    skybox.setMaterial(skyboxMaterial);
+
 	osgViewer::Viewer viewer;
 
-    KeyboardHandler* kbdHandler = new KeyboardHandler();
-    viewer.addEventHandler(kbdHandler);
+    //KeyboardHandler* kbdHandler = new KeyboardHandler();
+    //viewer.addEventHandler(kbdHandler);
 
     Camera camera(viewer.getCamera());
 
     float cameraAngle = 0;
-    float objectAnge = 0;
+    float objectAngle = 0;
+
 
 	viewer.setSceneData( root );
     while(viewer.done() == false)
     {
         cameraAngle += 0.03;
-        skybox.setRotation(0.5, 0, objectAnge);
+
+        skybox.setRotation(0.5, 0, objectAngle);
 
         camera.setRotation(osg::Vec3(0, sin(cameraAngle), 0));
         viewer.frame();

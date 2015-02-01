@@ -25,6 +25,10 @@ set(SOURCES
     Camera.h
     KeyboardHandler.h
     KeyboardHandler.cpp
+    Generator.cpp
+    Generator.h
+    TerrainGenerator.cpp
+    TerrainGenerator.h
     )
 
 add_executable( MyProject ${SOURCES} )

@@ -9,6 +9,8 @@ class Mesh
 public:
     Mesh(osg::Vec3Array* verts, std::vector<osg::DrawElementsUInt*>* faces, osg::Vec4Array* colors);
 
+    void setTextureCoords(osg::Vec2Array* texCoords);
+
     osg::Geometry* getOsgGeometry();
 private:
     osg::Geometry* mGeometry;

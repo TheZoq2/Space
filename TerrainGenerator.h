@@ -16,7 +16,6 @@ public:
 
 private:
     Generator generator;
-    Mesh* mesh;
 
     double getPointHeight(double x, double z, double detailLevel);
 };

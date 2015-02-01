@@ -1,3 +1,6 @@
+#ifndef H_MATERIAL
+#define H_MATERIAL
+
 #include <osg/StateSet>
 #include <osg/Texture>
 #include <osg/Texture2D>
@@ -19,3 +22,5 @@ private:
     //std::vector< osg::Texture > mTextures;
     std::map<int, osg::Texture2D*> mTextures;
 };
+
+#endif

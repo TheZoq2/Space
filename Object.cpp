@@ -44,6 +44,13 @@ void Object::setRotation(osg::Vec3 rotation)
 
     mRoot->setAttitude(mQuat);
 }
+void Object::setMaterial(Material material)
+{
+    this->mMaterial = material;
+
+    //Assiging the material stateset to the object
+    mRoot->setStateSet(material.getStateSet());
+}
 
 osg::PositionAttitudeTransform* Object::getRoot()
 {

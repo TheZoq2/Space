@@ -7,6 +7,7 @@
 #include <osg/PositionAttitudeTransform>
 
 #include "Mesh.h"
+#include "Material.h"
 
 class Object
 {
@@ -18,6 +19,8 @@ public:
     void setRotation(float rotationX, float rotationY, float rotationZ);
     void setRotation(osg::Vec3 rotation);
 
+    void setMaterial(Material material);
+
     osg::PositionAttitudeTransform* getRoot();
 private:
     osg::PositionAttitudeTransform* mRoot;
@@ -28,6 +31,8 @@ private:
     osg::Vec3 mScale;
     osg::Vec3 mRotation;
     osg::Quat mQuat;
+
+    Material mMaterial;
 };
 
 #endif

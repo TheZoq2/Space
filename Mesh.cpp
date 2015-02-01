@@ -19,6 +19,11 @@ Mesh::Mesh(osg::Vec3Array* verts, std::vector<osg::DrawElementsUInt*>* faces, os
     mGeometry->setColorBinding(osg::Geometry::BIND_PER_VERTEX);
 }
 
+void Mesh::setTextureCoords(osg::Vec2Array* texCoords)
+{
+    mGeometry->setTexCoordArray(0, texCoords);
+}
+
 osg::Geometry* Mesh::getOsgGeometry()
 {
     return this->mGeometry;
